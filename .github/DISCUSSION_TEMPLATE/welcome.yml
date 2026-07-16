@@ -1,0 +1,24 @@
+title: "Welcome to AgentGuard discussions"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use Discussions for questions, ideas, framework patterns, and rule design. Use Issues for accepted, actionable work. Report vulnerabilities privately through the Security tab.
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      options:
+        - Question
+        - Rule proposal
+        - Framework pattern
+        - Show and tell
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Share synthetic examples only; remove credentials and private code.
+    validations:
+      required: true

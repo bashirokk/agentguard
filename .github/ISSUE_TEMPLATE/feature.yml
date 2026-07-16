@@ -1,0 +1,30 @@
+name: Feature or rule request
+description: Propose a scanner capability, rule, framework, or integration
+title: "[Proposal]: "
+labels: [help wanted]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Security or developer problem
+      description: Describe the trust boundary and realistic attacker capability.
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Synthetic vulnerable and safe examples
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed behavior and remediation
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I would like to help implement this.

@@ -1,0 +1,9 @@
+.git
+.github
+.venv
+dist
+build
+tests
+docs
+*.sarif
+.coverage
