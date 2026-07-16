@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#102a4a"/></linearGradient><linearGradient id="s" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <circle cx="1090" cy="110" r="240" fill="#22d3ee" opacity=".06"/><circle cx="150" cy="590" r="260" fill="#2563eb" opacity=".09"/>
+  <path d="M250 118 390 172v104c0 91-58 142-140 174-82-32-140-83-140-174V172Z" fill="url(#s)"/>
+  <path d="M250 152 358 193v82c0 68-42 107-108 135-66-28-108-67-108-135v-82Z" fill="#07111f" opacity=".88"/>
+  <g stroke="#67e8f9" stroke-width="9" fill="#dbeafe"><path d="m198 279 48-62 56 72m-104-10 58 59 46-49" fill="none"/><circle cx="246" cy="217" r="16"/><circle cx="198" cy="279" r="16"/><circle cx="302" cy="289" r="16"/><circle cx="256" cy="338" r="16"/></g>
+  <text x="470" y="274" fill="#f8fafc" font-family="Inter,Segoe UI,sans-serif" font-size="112" font-weight="750" letter-spacing="-5">Agent<tspan fill="#22d3ee">Guard</tspan></text>
+  <text x="478" y="346" fill="#cbd5e1" font-family="Inter,Segoe UI,sans-serif" font-size="37">AI Agent Security Scanner</text>
+  <text x="478" y="416" fill="#94a3b8" font-family="Inter,Segoe UI,sans-serif" font-size="25">Secrets · Prompt injection · Unsafe tools · Privileges</text>
+  <rect x="478" y="463" width="408" height="58" rx="12" fill="#0b1729" stroke="#27415f"/><text x="505" y="501" fill="#67e8f9" font-family="ui-monospace,monospace" font-size="25">agentguard scan ./project</text>
+</svg>
