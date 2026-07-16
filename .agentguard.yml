@@ -1,0 +1,8 @@
+exclude:
+  - tests/**
+  - docs/**
+disabled_rules: []
+severity_overrides: {}
+plugins: []
+max_file_size_kb: 1024
+follow_symlinks: false

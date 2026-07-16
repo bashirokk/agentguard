@@ -1,0 +1,85 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentguard-sast"
+version = "0.1.0"
+description = "Static security scanner for AI agent applications"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "AgentGuard contributors"}]
+keywords = ["ai", "agents", "security", "langchain", "mcp", "sast", "cli"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+]
+dependencies = [
+  "packaging>=24.0",
+  "pyyaml>=6.0.1",
+  "rich>=13.7",
+  "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2",
+  "mypy>=1.11",
+  "pip-audit>=2.7",
+  "pytest>=8.2",
+  "pytest-cov>=5.0",
+  "ruff>=0.5",
+]
+
+[project.scripts]
+agentguard = "agentguard.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/amic25/agentguard"
+Documentation = "https://github.com/amic25/agentguard#readme"
+Issues = "https://github.com/amic25/agentguard/issues"
+Changelog = "https://github.com/amic25/agentguard/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentguard"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/docs", "/README.md", "/LICENSE", "/pyproject.toml", "/CHANGELOG.md"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --cov=agentguard --cov-report=term-missing --cov-fail-under=85"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["agentguard"]
+
+[tool.coverage.report]
+exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 110
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["B008", "E501"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = "yaml"
+ignore_missing_imports = true

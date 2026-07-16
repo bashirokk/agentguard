@@ -1,0 +1,82 @@
+"""Stable data model shared by rules, reporters, and plugins."""
+
+from __future__ import annotations
+
+from contextlib import suppress
+from dataclasses import asdict, dataclass, field
+from enum import IntEnum
+from pathlib import Path
+from typing import Any
+
+
+class Severity(IntEnum):
+    """Finding priority; larger values are more severe."""
+
+    LOW = 1
+    MEDIUM = 2
+    HIGH = 3
+    CRITICAL = 4
+
+    @classmethod
+    def parse(cls, value: str) -> Severity:
+        try:
+            return cls[value.upper()]
+        except KeyError as exc:
+            choices = ", ".join(item.name.lower() for item in cls)
+            raise ValueError(f"severity must be one of: {choices}") from exc
+
+
+@dataclass(frozen=True, slots=True)
+class Location:
+    """One source location."""
+
+    path: Path
+    line: int = 1
+    column: int = 1
+
+
+@dataclass(frozen=True, slots=True)
+class Finding:
+    """A normalized security finding emitted by a rule."""
+
+    rule_id: str
+    title: str
+    severity: Severity
+    location: Location
+    explanation: str
+    risk: str
+    remediation: str
+    category: str
+    confidence: str = "high"
+    references: tuple[str, ...] = ()
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self, root: Path | None = None) -> dict[str, Any]:
+        data = asdict(self)
+        path = self.location.path
+        if root:
+            with suppress(ValueError):
+                path = path.relative_to(root)
+        data["severity"] = self.severity.name.title()
+        data["location"]["path"] = path.as_posix()
+        data["references"] = list(self.references)
+        return data
+
+
+@dataclass(slots=True)
+class ScanResult:
+    """Aggregate result of one scan."""
+
+    root: Path
+    findings: list[Finding]
+    files_scanned: int
+    rules_run: int
+    skipped_files: int = 0
+    errors: list[str] = field(default_factory=list)
+    duration_ms: float = 0.0
+
+    def counts(self) -> dict[str, int]:
+        return {
+            severity.name.title(): sum(finding.severity == severity for finding in self.findings)
+            for severity in reversed(Severity)
+        }
